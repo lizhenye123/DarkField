@@ -11,17 +11,19 @@
  * 
  */
 UCLASS()
-class DARKFIELD_API AAuraEnemy : public AAuraCharacterBase,public IEnemyInterface
+class DARKFIELD_API AAuraEnemy : public AAuraCharacterBase, public IEnemyInterface
 {
 	GENERATED_BODY()
 
 public:
 	AAuraEnemy();
+	
+	/*Begin IEnemyInterface*/
 	//高亮Actor
 	virtual void HighLightActor()override;
 	//取消高亮
 	virtual void UnHighLightActor()override;
-
-public:
-
+	/*End IEnemyInterface*/
+protected:
+	virtual void BeginPlay() override;
 };
