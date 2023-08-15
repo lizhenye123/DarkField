@@ -27,7 +27,8 @@ protected:
 private:
 	//移动
 	void Move(const FInputActionValue&InputActionValue);
-
+	
+	//鼠标检测扫到的敌人
 	void CursorTrace();
 protected:
 	
@@ -39,8 +40,8 @@ private:
 	TObjectPtr<UInputAction> MoveAction;
 
 	//上一个鼠标扫到的Actor
-	IEnemyInterface*LastActor;
+	TObjectPtr<IEnemyInterface>LastActor;
 
 	//当前鼠标扫到的Actor
-	IEnemyInterface*ThisActor;
+	TObjectPtr<IEnemyInterface>ThisActor;
 };
