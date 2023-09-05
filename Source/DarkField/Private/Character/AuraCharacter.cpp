@@ -37,6 +37,13 @@ void AAuraCharacter::OnRep_PlayerState()
 	InitAbilityActorInfo();
 }
 
+int32 AAuraCharacter::GetPlayerLevel()
+{
+	AAuraPlayerState*AuraPlayerState = GetPlayerState<AAuraPlayerState>();
+	check(AuraPlayerState);
+	return AuraPlayerState->GetPlayerLevel();
+}
+
 void AAuraCharacter::InitAbilityActorInfo()
 {
 	AAuraPlayerState*AuraPlayerState = GetPlayerState<AAuraPlayerState>();
@@ -58,6 +65,6 @@ void AAuraCharacter::InitAbilityActorInfo()
 		}
 	}
 
-	//初始化主要的值
-	InitializePrimaryAttributes();
+	//初始化值
+	InitializeDefaultAttributes();
 }

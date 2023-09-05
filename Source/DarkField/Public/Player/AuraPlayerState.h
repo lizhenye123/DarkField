@@ -20,6 +20,9 @@ public:
 	AAuraPlayerState();
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	UAttributeSet*GetAttributeSet()const{return AttributeSet; }
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
+	FORCEINLINE int32 GetPlayerLevel()const;
 protected:
 	
 	UPROPERTY(VisibleAnywhere)
@@ -27,4 +30,13 @@ protected:
 
 	UPROPERTY()
 	TObjectPtr<UAttributeSet>AttributeSet;
+
+private:
+	//给角色使的,这个Level是同步的
+	UPROPERTY(VisibleAnywhere,ReplicatedUsing=OnRep_Level)
+	int32 Level=1;
+
+private:
+	UFUNCTION()
+	void OnRep_Level(int32 OldLevel);
 };

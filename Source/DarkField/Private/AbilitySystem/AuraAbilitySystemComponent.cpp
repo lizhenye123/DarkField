@@ -15,3 +15,4 @@ const FGameplayEffectSpec& EffectSpec, FActiveGameplayEffectHandle ActiveEffectH
 	EffectSpec.GetAllAssetTags(TagContainer);
 	EffectAssetTags.Broadcast(TagContainer);
 }
+ 

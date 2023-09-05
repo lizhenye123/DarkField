@@ -40,8 +40,8 @@ private:
 	TObjectPtr<UInputAction> MoveAction;
 
 	//上一个鼠标扫到的Actor
-	TObjectPtr<IEnemyInterface>LastActor;
+	IEnemyInterface*LastActor;
 
 	//当前鼠标扫到的Actor
-	TObjectPtr<IEnemyInterface>ThisActor;
+	IEnemyInterface*ThisActor;
 };

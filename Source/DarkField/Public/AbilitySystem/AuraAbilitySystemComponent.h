@@ -18,7 +18,7 @@ class DARKFIELD_API UAuraAbilitySystemComponent : public UAbilitySystemComponent
 public:
 	void AbilityActorInfoSet();
 
-	//有GE应用到身上时,返回GE的AssetTag
+	//有GE应用到身上时,返回GE的AssetTag,代理
 	FEffectAssetTags EffectAssetTags;
 protected:
 	void EffectApplied(UAbilitySystemComponent*AbilitySystemComponent,const FGameplayEffectSpec&EffectSpec,FActiveGameplayEffectHandle ActiveEffectHandle);

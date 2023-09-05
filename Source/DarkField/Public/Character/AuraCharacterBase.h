@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "AbilitySystemInterface.h"
+#include "Interface/CombatInterface.h"
 #include "AuraCharacterBase.generated.h"
 
 
@@ -13,7 +14,7 @@ class UAbilitySystemComponent;
 class UAttributeSet;
 
 UCLASS(Abstract)
-class DARKFIELD_API AAuraCharacterBase : public ACharacter,public IAbilitySystemInterface
+class DARKFIELD_API AAuraCharacterBase : public ACharacter,public IAbilitySystemInterface,public ICombatInterface
 {
 	GENERATED_BODY()
 	
@@ -25,16 +26,26 @@ protected:
 	virtual void BeginPlay() override;
 
 	virtual void InitAbilityActorInfo();
+	
+	//初始属性
+	void InitializeDefaultAttributes()const;
 
-	//初始化主要属性
-	void InitializePrimaryAttributes()const;
+	void ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffectClass,float Level)const;
 protected:
 	UPROPERTY(EditAnywhere,Category="Combat")
 	TObjectPtr<USkeletalMeshComponent> Weapon;
 
-	//初始化Attribute的GE
+	//初始化主要Attribute的GE
 	UPROPERTY(BlueprintReadOnly,EditAnywhere,Category="Attributes")
 	TSubclassOf<UGameplayEffect>DefaultPrimaryAttributes;
+
+	//初始化次要Attribute的GE
+	UPROPERTY(BlueprintReadOnly,EditAnywhere,Category="Attributes")
+	TSubclassOf<UGameplayEffect>DefaultSecondaryAttributes;
+
+	//初始化重要Attribute的GE
+	UPROPERTY(BlueprintReadOnly,EditAnywhere,Category="Attributes")
+	TSubclassOf<UGameplayEffect>DefaultVitalAttributes;
 	
 	UPROPERTY()
 	TObjectPtr<UAbilitySystemComponent>AbilitySystemComponent;
