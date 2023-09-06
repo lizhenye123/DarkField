@@ -42,6 +42,7 @@ public:
 	void SetWidgetControllerParams(const FWidgetControllerParams&WCParams);
 
 	//广播在UI中初始化显示
+	UFUNCTION(BlueprintCallable)
 	virtual void BroadcastInitialValues();
 
 	//绑定Attribute改变时的代理

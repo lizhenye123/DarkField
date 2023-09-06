@@ -9,6 +9,7 @@
 #include "AuraCharacterBase.generated.h"
 
 
+class UGameplayAbility;
 class UGameplayEffect;
 class UAbilitySystemComponent;
 class UAttributeSet;
@@ -31,6 +32,8 @@ protected:
 	void InitializeDefaultAttributes()const;
 
 	void ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffectClass,float Level)const;
+
+	void AddCharacterAbilities();
 protected:
 	UPROPERTY(EditAnywhere,Category="Combat")
 	TObjectPtr<USkeletalMeshComponent> Weapon;
@@ -52,4 +55,10 @@ protected:
 
 	UPROPERTY()
 	TObjectPtr<UAttributeSet>AttributeSet;
+
+private:
+
+	//出生时要携带的能力
+	UPROPERTY(EditAnywhere,Category="Abilities")
+	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
 };

@@ -48,6 +48,8 @@ struct FEffectProperties
 	ACharacter*TargetCharacter=nullptr;
 };
 
+template<class T>
+using TStaticFuncPtr = typename TBaseStaticDelegateInstance<T,FDefaultDelegateUserPolicy>::FFuncPtr;
 /**
  * 
  */
@@ -55,6 +57,7 @@ UCLASS()
 class DARKFIELD_API UAuraAttributeSet : public UAttributeSet
 {
 	GENERATED_BODY()
+
 public:
 	UAuraAttributeSet();
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
@@ -62,7 +65,10 @@ public:
 	virtual void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override;
 
 	virtual void PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData &Data)override;
-	
+public:
+
+	//拿对应的Tag,可以获取对应的Attribute
+	TMap<FGameplayTag,TStaticFuncPtr<FGameplayAttribute()>>TagsToAttributes;
 	/*
 	 * 主要属性
 	 */

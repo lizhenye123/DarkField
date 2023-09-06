@@ -5,6 +5,7 @@
 
 #include "AbilitySystemComponent.h"
 #include "ShaderPrintParameters.h"
+#include "AbilitySystem/AuraAbilitySystemComponent.h"
 
 AAuraCharacterBase::AAuraCharacterBase()
 {
@@ -39,6 +40,13 @@ void AAuraCharacterBase::ApplyEffectToSelf(TSubclassOf<UGameplayEffect> Gameplay
 	GetAbilitySystemComponent()->ApplyGameplayEffectSpecToTarget(*GameplayEffectSpecHandle.Data.Get(),GetAbilitySystemComponent());
 }
 
+void AAuraCharacterBase::AddCharacterAbilities()
+{
+	if(!HasAuthority())return;
+	
+	UAuraAbilitySystemComponent*AuraASC = Cast<UAuraAbilitySystemComponent>(AbilitySystemComponent);
+	AuraASC->AddCharacterAbilities(StartupAbilities);
+}
 
 UAbilitySystemComponent* AAuraCharacterBase::GetAbilitySystemComponent() const
 {
