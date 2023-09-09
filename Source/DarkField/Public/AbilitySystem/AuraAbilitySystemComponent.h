@@ -25,6 +25,9 @@ public:
 	//有GE应用到身上时,返回GE的AssetTag,代理
 	FEffectAssetTags EffectAssetTags;
 
+	void AbilityInputTagHeld(const FGameplayTag&InputTag);
+	void AbilityInputTagReleased(const FGameplayTag&InputTag);
 protected:
-	void EffectApplied(UAbilitySystemComponent*AbilitySystemComponent,const FGameplayEffectSpec&EffectSpec,FActiveGameplayEffectHandle ActiveEffectHandle);
+	UFUNCTION(Client,Reliable)
+	void ClientEffectApplied(UAbilitySystemComponent*AbilitySystemComponent,const FGameplayEffectSpec&EffectSpec,FActiveGameplayEffectHandle ActiveEffectHandle);
 };

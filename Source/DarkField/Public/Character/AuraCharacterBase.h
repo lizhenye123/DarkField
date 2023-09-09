@@ -22,7 +22,11 @@ class DARKFIELD_API AAuraCharacterBase : public ACharacter,public IAbilitySystem
 public:
 	AAuraCharacterBase();
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+	
 	UAttributeSet*GetAttributeSet()const{return AttributeSet; }
+
+	//获取子弹发射的位置
+	virtual FVector GetCombatSocketLocation()override;
 protected:
 	virtual void BeginPlay() override;
 
@@ -33,10 +37,15 @@ protected:
 
 	void ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffectClass,float Level)const;
 
+	//给角色添加技能
 	void AddCharacterAbilities();
+
 protected:
 	UPROPERTY(EditAnywhere,Category="Combat")
 	TObjectPtr<USkeletalMeshComponent> Weapon;
+	//武器发射物体的Socket
+	UPROPERTY(EditAnywhere,Category="Combat")
+	FName WeaponTipSocketName;
 
 	//初始化主要Attribute的GE
 	UPROPERTY(BlueprintReadOnly,EditAnywhere,Category="Attributes")

@@ -13,5 +13,9 @@ UCLASS()
 class DARKFIELD_API UAuraGameplayAbility : public UGameplayAbility
 {
 	GENERATED_BODY()
-	
+
+public:
+	//按键的那个Tag，按键按下时会找这个按键类型的Tag来激活能力
+	UPROPERTY(EditDefaultsOnly,Category="Input")
+	FGameplayTag StartupInputTag;
 };

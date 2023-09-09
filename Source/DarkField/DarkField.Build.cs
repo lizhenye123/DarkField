@@ -17,12 +17,14 @@ public class DarkField : ModuleRules
 			"EnhancedInput",
 			"GameplayAbilities",
 			"UMG",
+			"NavigationSystem",
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[]
 		{
 			"GameplayTags",
 			"GameplayTasks",
+			"Niagara",
 		});
 
 		// Uncomment if you are using Slate UI

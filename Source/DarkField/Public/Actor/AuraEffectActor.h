@@ -32,7 +32,9 @@ enum class EEffectRemovalPolicy
 	//不删除
 	DoNotRemove
 };
-
+/*
+ * 和角色重叠后要给角色添加某一些GE
+ */
 UCLASS()
 class DARKFIELD_API AAuraEffectActor : public AActor
 {
