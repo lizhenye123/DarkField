@@ -69,6 +69,7 @@ public:
 
 	//拿对应的Tag,可以获取对应的Attribute
 	TMap<FGameplayTag,TStaticFuncPtr<FGameplayAttribute()>>TagsToAttributes;
+	
 	/*
 	 * 主要属性
 	 */
@@ -156,6 +157,15 @@ public:
 	UPROPERTY(BlueprintReadOnly,ReplicatedUsing=OnRep_MaxMana,Category="Secondary Attributes")
 	FGameplayAttributeData MaxMana;
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet,MaxMana);
+
+
+	/*
+	 * Meta Attribute
+	 */
+	//临时的伤害,他不复制,在服务器处理
+	UPROPERTY(BlueprintReadOnly,Category="Meta Attributes")
+	FGameplayAttributeData IncomingDamage;
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet,IncomingDamage);
 	
 	UFUNCTION()
 	void OnRep_Health(const FGameplayAttributeData&OldHealth)const;

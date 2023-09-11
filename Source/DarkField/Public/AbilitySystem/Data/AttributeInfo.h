@@ -7,6 +7,9 @@
 #include "GameplayTagContainer.h"
 #include "AttributeInfo.generated.h"
 
+/*
+ * 属性表页面的 单个属性的详细信息
+ */
 USTRUCT(BlueprintType)
 struct FAuraAttributeInfo
 {
@@ -26,7 +29,7 @@ struct FAuraAttributeInfo
 };
 
 /**
- * 
+ * 属性点页面的属性信息
  */
 UCLASS()
 class DARKFIELD_API UAttributeInfo : public UDataAsset

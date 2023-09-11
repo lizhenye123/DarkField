@@ -33,7 +33,7 @@ protected:
 	virtual void InitAbilityActorInfo();
 	
 	//初始属性
-	void InitializeDefaultAttributes()const;
+	virtual void InitializeDefaultAttributes()const;
 
 	void ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffectClass,float Level)const;
 

@@ -3,9 +3,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AbilitySystem/Data/CharacterClassInfo.h"
 #include "Character/AuraCharacterBase.h"
 #include "Interface/EnemyInterface.h"
+#include "UI/WidgetController/OverlayWidgetController.h"
 #include "AuraEnemy.generated.h"
+
+class UWidgetComponent;
 
 /**
  * 
@@ -28,13 +32,31 @@ public:
 	/*ICombatInterface*/
 	virtual int32 GetPlayerLevel() override;
 	/*End ICombatInterface*/
+
+	//血条改变
+	UPROPERTY(BlueprintAssignable)
+	FOnAttributeChangedSignature OnHealthChanged;
+
+	UPROPERTY(BlueprintAssignable)
+	FOnAttributeChangedSignature OnMaxHealthChanged;
 protected:
 	virtual void BeginPlay() override;
 
 	virtual void InitAbilityActorInfo()override;
+
+	virtual void InitializeDefaultAttributes()const override;
+	
 	
 protected:
 	//给敌人用的,这个Level不同步
 	UPROPERTY(EditAnywhere,BlueprintReadOnly,Category="Character Class Defaults")
 	int32 Level = 1;
+
+	//AI的角色类型
+	UPROPERTY(EditAnywhere,BlueprintReadOnly,Category="Character Class Defaults")
+	ECharacterClass CharacterClass=ECharacterClass::Warrior;
+
+	//血条组件
+	UPROPERTY(VisibleAnywhere,BlueprintReadOnly)
+	TObjectPtr<UWidgetComponent>HealthBar;
 };

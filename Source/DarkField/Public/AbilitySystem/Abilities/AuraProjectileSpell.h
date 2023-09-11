@@ -25,4 +25,9 @@ protected:
 	//能力激活时发射的类
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly)
 	TSubclassOf<AAuraProjectile>AuraProjectile;
+
+	//伤害的GE
+	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly)
+	TSubclassOf<UGameplayEffect>DamageEffectClass;
+	
 };
