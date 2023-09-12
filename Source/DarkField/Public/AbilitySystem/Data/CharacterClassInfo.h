@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Abilities/GameplayAbility.h"
 #include "Engine/DataAsset.h"
 #include "CharacterClassInfo.generated.h"
 
@@ -48,6 +49,10 @@ public:
 	//血和蓝,所有角色初始化通用的角色属性
 	UPROPERTY(EditDefaultsOnly,Category="Common Class Defaults")
 	TSubclassOf<UGameplayEffect>VitalAttributes;
+
+	//通用的角色能力
+	UPROPERTY(EditDefaultsOnly,Category="Common Class Defaults")
+	TArray<TSubclassOf<UGameplayAbility>>CommonAbilities;
 
 	FCharacterClassDefaultInfo GetClassDefaultInfo(ECharacterClass CharacterClass);
 };

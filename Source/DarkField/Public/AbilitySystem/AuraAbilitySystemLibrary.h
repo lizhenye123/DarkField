@@ -26,6 +26,11 @@ public:
 	UFUNCTION(BlueprintPure,Category="AuraAbilitySystemLibrary|WidgetController")
 	static UAttributeWidgetController*GetAttributeWidgetController(const UObject*WorldContextObject);
 
+	//初始化角色的默认属性
 	UFUNCTION(BlueprintCallable,Category="AuraAbilitySystemLibrary|CharacterClassDefault")
 	static void InitialzeDefaultAttributes(const UObject*WorldContextObject, ECharacterClass CharacterClass,float Level,UAbilitySystemComponent*ASC);
+
+	//注册角色的技能
+	UFUNCTION(BlueprintCallable,Category="AuraAbilitySystemLibrary|CharacterClassDefault")
+	static void GiveStartupAbilities(const UObject*WorldContextObject,UAbilitySystemComponent*ASC);
 };

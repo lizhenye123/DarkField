@@ -27,6 +27,8 @@ public:
 
 	//获取子弹发射的位置
 	virtual FVector GetCombatSocketLocation()override;
+	//受击动画
+	virtual UAnimMontage*GetHitReactMontage_Implementation()override;
 protected:
 	virtual void BeginPlay() override;
 
@@ -66,8 +68,11 @@ protected:
 	TObjectPtr<UAttributeSet>AttributeSet;
 
 private:
-
 	//出生时要携带的能力
 	UPROPERTY(EditAnywhere,Category="Abilities")
 	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
+
+	//受击动画
+	UPROPERTY(EditAnywhere,Category="Combat")
+	TObjectPtr<UAnimMontage>HitReactMontage;
 };

@@ -3,11 +3,13 @@
 
 #include "Character/AuraEnemy.h"
 
+#include "AuraGameplayTags.h"
 #include "AbilitySystem/AuraAbilitySystemComponent.h"
 #include "AbilitySystem/AuraAbilitySystemLibrary.h"
 #include "AbilitySystem/AuraAttributeSet.h"
 #include "Components/WidgetComponent.h"
 #include "DarkField/DarkField.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "UI/Widget/AuraUserWidget.h"
 
@@ -49,8 +51,13 @@ int32 AAuraEnemy::GetPlayerLevel()
 void AAuraEnemy::BeginPlay()
 {
 	Super::BeginPlay();
+
+	GetCharacterMovement()->MaxWalkSpeed = BaseWalkSpeed;
+	
 	InitAbilityActorInfo();
 
+	UAuraAbilitySystemLibrary::GiveStartupAbilities(this,AbilitySystemComponent);
+	
 	if (UAuraUserWidget*AuraUserWidget= Cast<UAuraUserWidget>(HealthBar->GetUserWidgetObject()))
 	{
 		AuraUserWidget->SetWidgetController(this);
@@ -70,9 +77,20 @@ void AAuraEnemy::BeginPlay()
 			OnMaxHealthChanged.Broadcast(Data.NewValue);
 		});
 
+		//受击的代理
+		AbilitySystemComponent->RegisterGameplayTagEvent(FAuraGameplayTags::Get().Effects_HitReact,EGameplayTagEventType::NewOrRemoved).AddUObject(
+			this,&AAuraEnemy::HitReactTagChanged
+		);
+
 		OnHealthChanged.Broadcast(AuraAS->GetHealth());
 		OnMaxHealthChanged.Broadcast(AuraAS->GetMaxHealth());
-	}	
+	}
+}
+
+void AAuraEnemy::HitReactTagChanged(const FGameplayTag CallbackTag, int32 NewCount)
+{
+	bHitReacting = NewCount>0;
+	GetCharacterMovement()->MaxWalkSpeed = bHitReacting?0:BaseWalkSpeed;
 }
 
 void AAuraEnemy::InitAbilityActorInfo()

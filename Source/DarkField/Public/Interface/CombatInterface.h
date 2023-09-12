@@ -24,7 +24,11 @@ class DARKFIELD_API ICombatInterface
 public:
 	virtual int32 GetPlayerLevel();
 	virtual FVector GetCombatSocketLocation();
-	
+
+	//当前瞄准的目标位置
 	UFUNCTION(BlueprintImplementableEvent,BlueprintCallable)
 	void UpdateFacingTarget(const FVector&Target);
+
+	UFUNCTION(BlueprintNativeEvent,BlueprintCallable)
+	UAnimMontage*GetHitReactMontage();
 };
