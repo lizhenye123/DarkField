@@ -217,6 +217,9 @@ public:
 
 private:
 	void SetEffectProperties(const FGameplayEffectModCallbackData&Data,FEffectProperties&Props)const;
+
+	//显示浮动数字
+	void ShowFloatingText(const FEffectProperties& Props,float Damage)const;
 };
 
 

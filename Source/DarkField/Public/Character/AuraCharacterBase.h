@@ -25,10 +25,18 @@ public:
 	
 	UAttributeSet*GetAttributeSet()const{return AttributeSet; }
 
+	//ICombatInterface Begin
 	//获取子弹发射的位置
 	virtual FVector GetCombatSocketLocation()override;
 	//受击动画
 	virtual UAnimMontage*GetHitReactMontage_Implementation()override;
+	//死亡
+	virtual void Die() override;
+	//ICombatInterface End
+	
+	//死亡多播
+	UFUNCTION(NetMulticast,Reliable)
+	virtual void MulticastHandleDeath();
 protected:
 	virtual void BeginPlay() override;
 
@@ -41,6 +49,16 @@ protected:
 
 	//给角色添加技能
 	void AddCharacterAbilities();
+
+	//溶解
+	void Dissolve();
+
+	//溶解 在蓝图中使用的Timeline
+	UFUNCTION(BlueprintImplementableEvent)
+	void StartDissolveTimeline(UMaterialInstanceDynamic*DynamicMaterialInstance);
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void StartWeaponDissolveTimeline(UMaterialInstanceDynamic*DynamicMaterialInstance);
 
 protected:
 	UPROPERTY(EditAnywhere,Category="Combat")
@@ -67,6 +85,13 @@ protected:
 	UPROPERTY()
 	TObjectPtr<UAttributeSet>AttributeSet;
 
+	//角色死亡时的溶解材质
+	UPROPERTY(BlueprintReadOnly,EditAnywhere,Category="Dissolve")
+	TObjectPtr<UMaterialInstance>DissolveMaterialInstance;
+
+	//武器的溶解材质
+	UPROPERTY(BlueprintReadOnly,EditAnywhere,Category="Dissolve")
+	TObjectPtr<UMaterialInstance>WeaponDissolveMaterialInstance;
 private:
 	//出生时要携带的能力
 	UPROPERTY(EditAnywhere,Category="Abilities")

@@ -31,6 +31,7 @@ public:
 
 	/*ICombatInterface*/
 	virtual int32 GetPlayerLevel() override;
+	virtual void Die() override;
 	/*End ICombatInterface*/
 
 	//血条改变
@@ -50,6 +51,10 @@ public:
 	//受击中？
 	UPROPERTY(BlueprintReadOnly,Category="Combat")
 	float BaseWalkSpeed = 250.f;
+
+	//受击中？
+	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly,Category="Combat")
+	float LifeSpan = 5.f;
 protected:
 	virtual void BeginPlay() override;
 

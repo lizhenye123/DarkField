@@ -9,6 +9,7 @@
 #include "GameFramework/PlayerController.h"
 #include "AuraPlayerController.generated.h"
 
+class UDamageTextComponent;
 class UAuraAbilitySystemComponent;
 struct FGameplayTag;
 class UAuraInputConfig;
@@ -26,6 +27,10 @@ class DARKFIELD_API AAuraPlayerController : public APlayerController
 	GENERATED_BODY()
 public:
 	AAuraPlayerController();
+
+	//显示伤害的Widget
+	UFUNCTION(Client,Reliable)
+	void ShowDamageNumber(float DamageAmout,ACharacter*TargetCharacter);
 protected:
 	virtual void BeginPlay() override;
 	virtual void SetupInputComponent() override;
@@ -109,7 +114,10 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<USplineComponent>Spline;
 
-	
+//伤害	
+	//伤害信息组件
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<UDamageTextComponent>DamageTextComponentClass;
 };
 
 

@@ -2,7 +2,6 @@
 
 
 #include "Player/AuraPlayerController.h"
-
 #include "AuraGameplayTags.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
@@ -12,11 +11,24 @@
 #include "Components/SplineComponent.h"
 #include "Input/AuranputComponent.h"
 #include "Interface/EnemyInterface.h"
+#include "UI/Widget/DamageTextComponent.h"
 
 AAuraPlayerController::AAuraPlayerController()
 {
 	bReplicates=true;
 	Spline = CreateDefaultSubobject<USplineComponent>(TEXT("Spline"));
+}
+
+void AAuraPlayerController::ShowDamageNumber_Implementation(float DamageAmout,ACharacter*TargetCharacter)
+{
+	if (IsValid(TargetCharacter)&&DamageTextComponentClass)
+	{
+		UDamageTextComponent*DamageText = NewObject<UDamageTextComponent>(TargetCharacter,DamageTextComponentClass);
+		DamageText->RegisterComponent();
+		DamageText->AttachToComponent(TargetCharacter->GetRootComponent(),FAttachmentTransformRules::KeepRelativeTransform);
+		DamageText->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
+		DamageText->SetDamageText(DamageAmout);
+	}
 }
 
 void AAuraPlayerController::BeginPlay()

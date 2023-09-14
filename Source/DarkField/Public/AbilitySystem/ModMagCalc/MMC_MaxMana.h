@@ -17,5 +17,6 @@ public:
 	UMMC_MaxMana();
 	virtual float CalculateBaseMagnitude_Implementation(const FGameplayEffectSpec& Spec) const override;
 private:
+	//要捕获的某一个值,和AttributeBase那个用法一样
 	FGameplayEffectAttributeCaptureDefinition IntelligenceDef;
 };
