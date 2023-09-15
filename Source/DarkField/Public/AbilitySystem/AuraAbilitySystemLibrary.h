@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Data/CharacterClassInfo.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "AuraAbilitySystemLibrary.generated.h"
 
@@ -33,4 +34,8 @@ public:
 	//注册角色的技能
 	UFUNCTION(BlueprintCallable,Category="AuraAbilitySystemLibrary|CharacterClassDefault")
 	static void GiveStartupAbilities(const UObject*WorldContextObject,UAbilitySystemComponent*ASC);
+
+	//获取GameMode里的ClassInfo
+	UFUNCTION(BlueprintCallable,Category="AuraAbilitySystemLibrary|CharacterClassDefault")
+	static UCharacterClassInfo *GetCharacterClassInfo(const UObject*WorldContextObject);
 };
