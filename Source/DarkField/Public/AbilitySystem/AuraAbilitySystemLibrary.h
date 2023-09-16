@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AuraAbilityTypes.h"
 #include "Data/CharacterClassInfo.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "AuraAbilitySystemLibrary.generated.h"
@@ -38,4 +39,20 @@ public:
 	//获取GameMode里的ClassInfo
 	UFUNCTION(BlueprintCallable,Category="AuraAbilitySystemLibrary|CharacterClassDefault")
 	static UCharacterClassInfo *GetCharacterClassInfo(const UObject*WorldContextObject);
+
+	//当前的GE是不是伤害减半
+	UFUNCTION(BlueprintPure,Category="AuraAbilitySystemLibrary|CharacterClassDefault")
+	static bool IsBlockedHit(const FGameplayEffectContextHandle&EffectContextHandle);
+
+	//当前的GE是不是暴击
+	UFUNCTION(BlueprintPure,Category="AuraAbilitySystemLibrary|CharacterClassDefault")
+	static bool IsCriticalHit(const FGameplayEffectContextHandle&EffectContextHandle);
+
+	//设置当前GE是否阻挡
+	UFUNCTION(BlueprintCallable,Category="AuraAbilitySystemLibrary|CharacterClassDefault")
+	static void SetIsBlockedHit(UPARAM(ref) FGameplayEffectContextHandle&EffectContextHandle,bool bInIsBlockedHit);
+
+	//设置当前GE是否暴击
+	UFUNCTION(BlueprintCallable,Category="AuraAbilitySystemLibrary|CharacterClassDefault")
+	static void SetIsCriticalHit(UPARAM(ref) FGameplayEffectContextHandle&EffectContextHandle,bool bInIsCriticalHit);
 };

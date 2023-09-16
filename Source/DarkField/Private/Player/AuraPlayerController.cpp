@@ -19,7 +19,7 @@ AAuraPlayerController::AAuraPlayerController()
 	Spline = CreateDefaultSubobject<USplineComponent>(TEXT("Spline"));
 }
 
-void AAuraPlayerController::ShowDamageNumber_Implementation(float DamageAmout,ACharacter*TargetCharacter)
+void AAuraPlayerController::ShowDamageNumber_Implementation(float DamageAmout,ACharacter*TargetCharacter,bool bBlockedHit,bool bCriticalHit)
 {
 	if (IsValid(TargetCharacter)&&DamageTextComponentClass)
 	{
@@ -27,7 +27,7 @@ void AAuraPlayerController::ShowDamageNumber_Implementation(float DamageAmout,AC
 		DamageText->RegisterComponent();
 		DamageText->AttachToComponent(TargetCharacter->GetRootComponent(),FAttachmentTransformRules::KeepRelativeTransform);
 		DamageText->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
-		DamageText->SetDamageText(DamageAmout);
+		DamageText->SetDamageText(DamageAmout,bBlockedHit,bCriticalHit);
 	}
 }
 

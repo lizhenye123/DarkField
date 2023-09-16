@@ -58,7 +58,7 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 	ICombatInterface*TargetCombatInterface = Cast<ICombatInterface>(TargetAvater);
 
 	const FGameplayEffectSpec&Spec = ExecutionParams.GetOwningSpec();
-
+	
 	const FGameplayTagContainer*SourceTags = Spec.CapturedSourceTags.GetAggregatedTags();
 	const FGameplayTagContainer*TargetTags = Spec.CapturedTargetTags.GetAggregatedTags();
 	FAggregatorEvaluateParameters EvaluateParameters;
@@ -75,6 +75,8 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 
 	const bool bBlocked = FMath::RandRange(1,100)<TargetBlockChance;
 	Damage = bBlocked==true ? Damage/2 : Damage;
+	FGameplayEffectContextHandle DamageEffectContextHandle = Spec.GetContext();
+	UAuraAbilitySystemLibrary::SetIsBlockedHit(DamageEffectContextHandle,bBlocked);
 
 	//Targte护甲
 	float TargetArmor = 0.f;
@@ -122,7 +124,8 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 	
 	const float EffectiveCriticalHitChange = SourceCriticalHitChanage - TargetCriticalHitResistance*CriticalHitResistanceCoefficient;
 	const bool bCriticalHit = FMath::RandRange(1,100)<EffectiveCriticalHitChange;
-
+	UAuraAbilitySystemLibrary::SetIsCriticalHit(DamageEffectContextHandle,bCriticalHit);
+	
 	//加完暴击的伤害
 	Damage = bCriticalHit?2.f*Damage + SourceCriticalHitDamage:Damage;
 	

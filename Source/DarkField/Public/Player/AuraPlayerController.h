@@ -30,7 +30,7 @@ public:
 
 	//显示伤害的Widget
 	UFUNCTION(Client,Reliable)
-	void ShowDamageNumber(float DamageAmout,ACharacter*TargetCharacter);
+	void ShowDamageNumber(float DamageAmout,ACharacter*TargetCharacter,bool bBlockedHit,bool bCriticalHit);
 protected:
 	virtual void BeginPlay() override;
 	virtual void SetupInputComponent() override;
