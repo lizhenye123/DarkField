@@ -25,6 +25,7 @@ public class DarkField : ModuleRules
 			"GameplayTags",
 			"GameplayTasks",
 			"Niagara",
+			"AIModule",
 		});
 
 		// Uncomment if you are using Slate UI

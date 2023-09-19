@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AbilitySystem/Data/CharacterClassInfo.h"
+#include "AI/AuraAIController.h"
 #include "Character/AuraCharacterBase.h"
 #include "Interface/EnemyInterface.h"
 #include "UI/WidgetController/OverlayWidgetController.h"
@@ -61,7 +62,8 @@ protected:
 	virtual void InitAbilityActorInfo()override;
 
 	virtual void InitializeDefaultAttributes()const override;
-	
+
+	virtual void PossessedBy(AController* NewController) override;
 	
 protected:
 	//给敌人用的,这个Level不同步
@@ -75,4 +77,12 @@ protected:
 	//血条组件
 	UPROPERTY(VisibleAnywhere,BlueprintReadOnly)
 	TObjectPtr<UWidgetComponent>HealthBar;
+
+	//这个角色要运行的行为树
+	UPROPERTY(EditAnywhere,Category="AI")
+	TObjectPtr<UBehaviorTree>BehaviorTree;
+
+	//这个角色的AI控制器
+	UPROPERTY()
+	TObjectPtr<AAuraAIController>AuraAIController;
 };

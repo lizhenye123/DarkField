@@ -50,6 +50,16 @@ public:
 	//最大蓝条
 	FGameplayTag Attributes_Secondary_MaxMana;
 
+	//伤害抵抗
+	//火
+	FGameplayTag Attributes_Resistance_Fire;
+	//闪电
+	FGameplayTag Attributes_Resistance_Lightning;
+	//奥术
+	FGameplayTag Attributes_Resistance_Arcane;
+	//物理
+	FGameplayTag Attributes_Resistance_Physical;
+
 	//输入的Tag
 	FGameplayTag InputTag_LMB;
 	FGameplayTag InputTag_RMB;
@@ -60,6 +70,17 @@ public:
 
 	//伤害Tag
 	FGameplayTag Damage;
+	//火焰
+	FGameplayTag Damage_Fire;
+	//闪电
+	FGameplayTag Damage_Lightning;
+	//奥术
+	FGameplayTag Damage_Arcane;
+	//物理
+	FGameplayTag Damage_Physical;
+	
+	//所有的伤害标签和抵抗标签
+	TMap<FGameplayTag,FGameplayTag> DamageTypesToResistances;
 
 	//受击的Tag
 	FGameplayTag Effects_HitReact;
