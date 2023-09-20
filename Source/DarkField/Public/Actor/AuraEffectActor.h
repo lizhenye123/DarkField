@@ -64,6 +64,14 @@ protected:
 
 	UPROPERTY(EditAnywhere,BlueprintReadOnly,Category="Applied Effect")
 	float ActorLevel=1.f;
+
+	//GE应用后销毁吗
+	UPROPERTY(EditAnywhere,BlueprintReadOnly,Category="Applied Effect")
+	bool bDestroyOnEffectApplication = false;
+
+	//GE可以给敌人施加吗
+	UPROPERTY(EditAnywhere,BlueprintReadOnly,Category="Applied Effect")
+	bool bApplyEffectsToEnemies = false;
 	
 	TMap<FActiveGameplayEffectHandle,UAbilitySystemComponent*>ActiveEffectHandles;
 public:	

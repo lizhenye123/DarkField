@@ -116,9 +116,14 @@ void AAuraPlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
 				{
 					Spline->AddSplinePoint(PointLoc,ESplineCoordinateSpace::World);
 				}
-				//因为导航网格生成的,是绝对可以到达的点,鼠标那个点的不一定是可以到达的点,所以终点变成了这个
-				CachedDestination = NavPath->PathPoints[NavPath->PathPoints.Num() - 1];
-				bAutoRunning = true;
+				
+				if (NavPath->PathPoints.Num()>0)
+				{
+					//因为导航网格生成的,是绝对可以到达的点,鼠标那个点的不一定是可以到达的点,所以终点变成了这个
+					CachedDestination = NavPath->PathPoints[NavPath->PathPoints.Num() - 1];
+					bAutoRunning = true;
+				}
+				
 			}
 		}
 		FollowTime = 0.f;
