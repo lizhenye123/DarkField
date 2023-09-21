@@ -79,7 +79,15 @@ public:
 	//物理
 	FGameplayTag Damage_Physical;
 
+	//攻击
 	FGameplayTag Abilities_Attack;
+	//武器
+	FGameplayTag Montage_Attack_Weapon;
+	//右手
+	FGameplayTag Montage_Attack_RightHand;
+	//左手
+	FGameplayTag Montage_Attack_LeftHand;
+
 	
 	//所有的伤害标签和抵抗标签
 	TMap<FGameplayTag,FGameplayTag> DamageTypesToResistances;

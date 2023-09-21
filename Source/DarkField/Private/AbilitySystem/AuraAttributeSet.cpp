@@ -164,7 +164,14 @@ void UAuraAttributeSet::ShowFloatingText(const FEffectProperties& Props, float D
 {
 	if (Props.SourceCharacter!=Props.TargetCharacter)
 	{
+		//玩家
 		if (AAuraPlayerController*PC = Cast<AAuraPlayerController>(Props.SourceCharacter->Controller))
+		{
+			PC->ShowDamageNumber(Damage,Props.TargetCharacter,bBlockedHit,bCriticalHit);
+			return;
+		}
+		//AI打到玩家,在玩家的控制器生成伤害字体
+		if (AAuraPlayerController*PC = Cast<AAuraPlayerController>(Props.TargetCharacter->Controller))
 		{
 			PC->ShowDamageNumber(Damage,Props.TargetCharacter,bBlockedHit,bCriticalHit);
 		}

@@ -18,6 +18,10 @@ UCLASS(Abstract)
 class DARKFIELD_API AAuraCharacterBase : public ACharacter,public IAbilitySystemInterface,public ICombatInterface
 {
 	GENERATED_BODY()
+public:
+	//角色的所有攻击蒙太奇
+	UPROPERTY(EditAnywhere,Category="Combat")
+	TArray<FTaggedMontage> AttackMonatges;
 	
 public:
 	AAuraCharacterBase();
@@ -27,11 +31,22 @@ public:
 
 	//ICombatInterface Begin
 	//获取子弹发射的位置
-	virtual FVector GetCombatSocketLocation()override;
+	virtual FVector GetCombatSocketLocation_Implementation(const FGameplayTag&MontageTag)override;
+	
 	//受击动画
 	virtual UAnimMontage*GetHitReactMontage_Implementation()override;
+	
 	//死亡
 	virtual void Die() override;
+	
+	//是否死亡
+	virtual bool IsDead_Implementation() const override;
+	
+	//获取化身
+	virtual AActor* GetAvatar_Implementation() override;
+
+	//获取所有攻击蒙太奇
+	virtual  TArray<FTaggedMontage> GetAttackMontages_Implementation() override;
 	//ICombatInterface End
 	
 	//死亡多播
@@ -67,6 +82,14 @@ protected:
 	UPROPERTY(EditAnywhere,Category="Combat")
 	FName WeaponTipSocketName;
 
+	//左手插槽
+	UPROPERTY(EditAnywhere,Category="Combat")
+	FName LeftHandSocketName;
+
+	//右手插槽
+	UPROPERTY(EditAnywhere,Category="Combat")
+	FName RightHandSocketName;
+
 	//初始化主要Attribute的GE
 	UPROPERTY(BlueprintReadOnly,EditAnywhere,Category="Attributes")
 	TSubclassOf<UGameplayEffect>DefaultPrimaryAttributes;
@@ -92,6 +115,9 @@ protected:
 	//武器的溶解材质
 	UPROPERTY(BlueprintReadOnly,EditAnywhere,Category="Dissolve")
 	TObjectPtr<UMaterialInstance>WeaponDissolveMaterialInstance;
+
+	//死亡？
+	bool bDead=false;
 private:
 	//出生时要携带的能力
 	UPROPERTY(EditAnywhere,Category="Abilities")

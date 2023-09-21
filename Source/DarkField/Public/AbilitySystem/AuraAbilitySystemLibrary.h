@@ -55,4 +55,8 @@ public:
 	//设置当前GE是否暴击
 	UFUNCTION(BlueprintCallable,Category="AuraAbilitySystemLibrary|CharacterClassDefault")
 	static void SetIsCriticalHit(UPARAM(ref) FGameplayEffectContextHandle&EffectContextHandle,bool bInIsCriticalHit);
+
+	//获取半径内的Actor
+	UFUNCTION(BlueprintCallable,Category="AuraAbilitySystemLibrary|GameplayMechanics")
+	static void GetLivePlayerWithinRadius(const UObject*WorldContextObject,TArray<AActor*>&OutOverlappingActors,const TArray<AActor*>&ActorsToIgnore,float Radius,const FVector&SphereOrigin);
 };

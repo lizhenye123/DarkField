@@ -13,6 +13,10 @@ UCLASS()
 class DARKFIELD_API UAuraDamageGameplayAbility : public UAuraGameplayAbility
 {
 	GENERATED_BODY()
+public:
+	//给这个目标添加伤害GE
+	UFUNCTION(BlueprintCallable)
+	void CauseDamage(AActor*TargetActor);
 protected:
 	//伤害的GE
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly)
