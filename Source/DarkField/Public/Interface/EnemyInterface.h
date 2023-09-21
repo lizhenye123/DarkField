@@ -24,4 +24,13 @@ public:
 	virtual void HighLightActor()=0;
 	//取消高亮
 	virtual void UnHighLightActor()=0;
+
+	//设置战斗目标
+	UFUNCTION(BlueprintNativeEvent,BlueprintCallable)
+	void SetCombatTarget(AActor*InCombatTarget);
+
+	//回去攻击目标
+	UFUNCTION(BlueprintNativeEvent,BlueprintCallable)
+	AActor* GetCombatTarget()const;
+	
 };

@@ -28,7 +28,10 @@ struct FCharacterClassDefaultInfo
 	//角色的默认主属性
 	UPROPERTY(EditDefaultsOnly,Category="Class Defaults")
 	TSubclassOf<UGameplayEffect>PrimaryAttributes;
-	
+
+	//当前类型的角色的技能
+	UPROPERTY(EditDefaultsOnly,Category="Class Defaults")
+	TArray<TSubclassOf<UGameplayAbility>>StartupAbilities;
 };
 /**
  * 所有角色的的初始化信息

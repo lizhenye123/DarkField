@@ -34,7 +34,7 @@ public:
 
 	//注册角色的技能
 	UFUNCTION(BlueprintCallable,Category="AuraAbilitySystemLibrary|CharacterClassDefault")
-	static void GiveStartupAbilities(const UObject*WorldContextObject,UAbilitySystemComponent*ASC);
+	static void GiveStartupAbilities(const UObject*WorldContextObject,UAbilitySystemComponent*ASC,ECharacterClass CharacterClass);
 
 	//获取GameMode里的ClassInfo
 	UFUNCTION(BlueprintCallable,Category="AuraAbilitySystemLibrary|CharacterClassDefault")

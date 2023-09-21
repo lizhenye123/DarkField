@@ -28,6 +28,9 @@ public:
 	virtual void HighLightActor()override;
 	//取消高亮
 	virtual void UnHighLightActor()override;
+	
+	virtual void SetCombatTarget_Implementation(AActor* InCombatTarget) override;
+	virtual AActor* GetCombatTarget_Implementation() const override;
 	/*End IEnemyInterface*/
 
 	/*ICombatInterface*/
@@ -56,6 +59,10 @@ public:
 	//受击中？
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly,Category="Combat")
 	float LifeSpan = 5.f;
+
+	//当前AI攻击的目标
+	UPROPERTY(BlueprintReadWrite,Category="Combat")
+	TObjectPtr<AActor>CombatTarget;
 protected:
 	virtual void BeginPlay() override;
 
@@ -85,4 +92,6 @@ protected:
 	//这个角色的AI控制器
 	UPROPERTY()
 	TObjectPtr<AAuraAIController>AuraAIController;
+	
+	
 };
