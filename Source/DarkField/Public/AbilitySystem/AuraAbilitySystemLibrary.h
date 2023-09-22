@@ -59,4 +59,8 @@ public:
 	//获取半径内的Actor
 	UFUNCTION(BlueprintCallable,Category="AuraAbilitySystemLibrary|GameplayMechanics")
 	static void GetLivePlayerWithinRadius(const UObject*WorldContextObject,TArray<AActor*>&OutOverlappingActors,const TArray<AActor*>&ActorsToIgnore,float Radius,const FVector&SphereOrigin);
+
+	//两个Actor不是友方
+	UFUNCTION(BlueprintPure,Category="AuraAbilitySystemLibrary|GameplayMechanics")
+	static bool IsNotFirend(AActor*FirstActor,AActor*SecondActor);
 };
