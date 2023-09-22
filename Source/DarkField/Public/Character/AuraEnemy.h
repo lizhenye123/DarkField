@@ -53,7 +53,7 @@ public:
 	bool bHitReacting = false;
 
 	//受击中？
-	UPROPERTY(BlueprintReadOnly,Category="Combat")
+	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly,Category="Combat")
 	float BaseWalkSpeed = 250.f;
 
 	//受击中？
