@@ -79,14 +79,27 @@ public:
 	//物理
 	FGameplayTag Damage_Physical;
 
+	//敌人的攻击手段
 	//攻击
 	FGameplayTag Abilities_Attack;
+	//召唤
+	FGameplayTag Abilities_Summon;
+
+	//Socket
 	//武器
-	FGameplayTag Montage_Attack_Weapon;
+	FGameplayTag CombatSocket_Weapon;
 	//右手
-	FGameplayTag Montage_Attack_RightHand;
+	FGameplayTag CombatSocket_RightHand;
 	//左手
-	FGameplayTag Montage_Attack_LeftHand;
+	FGameplayTag CombatSocket_LeftHand;
+	//尾巴
+	FGameplayTag CombatSocket_Tail;
+
+	//Montage
+	FGameplayTag Montage_Attack_1;
+	FGameplayTag Montage_Attack_2;
+	FGameplayTag Montage_Attack_3;
+	FGameplayTag Montage_Attack_4;
 
 	
 	//所有的伤害标签和抵抗标签

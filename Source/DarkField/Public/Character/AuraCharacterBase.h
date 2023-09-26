@@ -47,6 +47,18 @@ public:
 
 	//获取所有攻击蒙太奇
 	virtual  TArray<FTaggedMontage> GetAttackMontages_Implementation() override;
+
+	//获取击中特效
+	virtual UNiagaraSystem* GetBloodEffect_Implementation() override;
+
+	//通过蒙太奇标签获取TaggedMontage
+	virtual FTaggedMontage GetTaggedMontageByTag_Implementation(const FGameplayTag& MontageTag) override;
+
+	//获取召唤技能,召唤出来当前的怪物数量
+	virtual int32 GetMinionCount_Implementation() override;
+
+	//设置当前的召唤物数量
+	virtual void IncrementMinionCount_Implementation(int32 Amount) override;
 	//ICombatInterface End
 	
 	//死亡多播
@@ -76,8 +88,9 @@ protected:
 	void StartWeaponDissolveTimeline(UMaterialInstanceDynamic*DynamicMaterialInstance);
 
 protected:
-	UPROPERTY(EditAnywhere,Category="Combat")
+	UPROPERTY(EditAnywhere,BlueprintReadOnly,Category="Combat")
 	TObjectPtr<USkeletalMeshComponent> Weapon;
+	
 	//武器发射物体的Socket
 	UPROPERTY(EditAnywhere,Category="Combat")
 	FName WeaponTipSocketName;
@@ -89,6 +102,10 @@ protected:
 	//右手插槽
 	UPROPERTY(EditAnywhere,Category="Combat")
 	FName RightHandSocketName;
+
+	//尾部插槽
+	UPROPERTY(EditAnywhere,Category="Combat")
+	FName TailSocketName;
 
 	//初始化主要Attribute的GE
 	UPROPERTY(BlueprintReadOnly,EditAnywhere,Category="Attributes")
@@ -116,8 +133,19 @@ protected:
 	UPROPERTY(BlueprintReadOnly,EditAnywhere,Category="Dissolve")
 	TObjectPtr<UMaterialInstance>WeaponDissolveMaterialInstance;
 
+	//角色被击中的特效
+	UPROPERTY(BlueprintReadOnly,EditAnywhere,Category="Dissolve")
+	UNiagaraSystem*BloodEffect;
+
+	//死亡时的音效
+	UPROPERTY(BlueprintReadOnly,EditAnywhere,Category="Dissolve")
+	USoundBase*DeathSound;
+
 	//死亡？
 	bool bDead=false;
+
+	//获取召唤技能,召唤出来当前的怪物数量
+	int32 MinionCount = 0;
 private:
 	//出生时要携带的能力
 	UPROPERTY(EditAnywhere,Category="Abilities")

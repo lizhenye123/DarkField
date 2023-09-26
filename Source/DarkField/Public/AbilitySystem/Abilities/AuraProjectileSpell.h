@@ -20,7 +20,7 @@ protected:
 
 	//生成抛射类
 	UFUNCTION(BlueprintCallable,Category="Projectile")
-	void SpawnProjectile(const FVector&ProjectileTargetLocation);
+	void SpawnProjectile(const FVector&ProjectileTargetLocation,const FGameplayTag&SocketTag,bool bOverridePitch = false,float PitchOverride = 0.f);
 protected:
 	//能力激活时发射的类
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly)
