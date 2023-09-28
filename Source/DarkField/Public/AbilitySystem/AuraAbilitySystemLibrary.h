@@ -63,4 +63,8 @@ public:
 	//两个Actor不是友方
 	UFUNCTION(BlueprintPure,Category="AuraAbilitySystemLibrary|GameplayMechanics")
 	static bool IsNotFirend(AActor*FirstActor,AActor*SecondActor);
+
+	//通过角色类型和等级获取返还给角色的XP
+	UFUNCTION(BlueprintPure,Category="AuraAbilitySystemLibrary|GameplayMechanics")
+	static int32 GetXPRewardForClassAndLevel(const UObject*WorldContextObject,ECharacterClass CharacterClass,int32 CharacterLevel);
 };

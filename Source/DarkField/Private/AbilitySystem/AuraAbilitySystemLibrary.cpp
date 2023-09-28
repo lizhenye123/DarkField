@@ -161,4 +161,15 @@ bool UAuraAbilitySystemLibrary::IsNotFirend(AActor* FirstActor, AActor* SecondAc
 	return !bFriends;
 }
 
+int32 UAuraAbilitySystemLibrary::GetXPRewardForClassAndLevel(const UObject* WorldContextObject,ECharacterClass CharacterClass, int32 CharacterLevel)
+{
+	UCharacterClassInfo* CharacterClassInfo= GetCharacterClassInfo(WorldContextObject);
+	if(!CharacterClassInfo) return 0;
+
+	const FCharacterClassDefaultInfo CharacterClassDefaultInfo=	CharacterClassInfo->GetClassDefaultInfo(CharacterClass);
+	const float XRReward= CharacterClassDefaultInfo.XPReward.GetValueAtLevel(CharacterLevel);
+	
+	return static_cast<int32>(XRReward);
+}
+
 

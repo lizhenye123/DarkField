@@ -5,6 +5,7 @@
 
 #include "AbilitySystemComponent.h"
 #include "AbilitySystem/AuraAbilitySystemComponent.h"
+#include "AbilitySystem/AuraAbilitySystemLibrary.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Player/AuraPlayerController.h"
 #include "Player/AuraPlayerState.h"
@@ -21,6 +22,7 @@ AAuraCharacter::AAuraCharacter()
 	bUseControllerRotationPitch=false;
 	bUseControllerRotationRoll=false;
 	bUseControllerRotationYaw=false;
+	CharacterClass= ECharacterClass::Elementalist;
 }
 
 void AAuraCharacter::PossessedBy(AController* NewController)
@@ -50,12 +52,15 @@ void AAuraCharacter::InitAbilityActorInfo()
 	AAuraPlayerState*AuraPlayerState = GetPlayerState<AAuraPlayerState>();
 	check(AuraPlayerState);
 	AuraPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(AuraPlayerState,this);
-
+	
 	//这让组件初始化的时候绑定一些代理
 	Cast<UAuraAbilitySystemComponent>(AuraPlayerState->GetAbilitySystemComponent())->AbilityActorInfoSet();
 	
 	AbilitySystemComponent = AuraPlayerState->GetAbilitySystemComponent();
 	AttributeSet = AuraPlayerState->GetAttributeSet();
+
+	//初始化值
+	InitializeDefaultAttributes();
 
 	//控制器只在主制端和服务端有,那些模拟玩家这是进不来的
 	if (AAuraPlayerController*AuraPlayerController= Cast<AAuraPlayerController>(GetController()))
@@ -65,7 +70,4 @@ void AAuraCharacter::InitAbilityActorInfo()
 			AuraHUD->InitOverlay(AuraPlayerController,AuraPlayerState,AbilitySystemComponent,AttributeSet);
 		}
 	}
-
-	//初始化值
-	InitializeDefaultAttributes();
 }

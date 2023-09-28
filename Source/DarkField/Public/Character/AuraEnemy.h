@@ -77,10 +77,6 @@ protected:
 	UPROPERTY(EditAnywhere,BlueprintReadOnly,Category="Character Class Defaults")
 	int32 Level = 1;
 
-	//AI的角色类型
-	UPROPERTY(EditAnywhere,BlueprintReadOnly,Category="Character Class Defaults")
-	ECharacterClass CharacterClass=ECharacterClass::Warrior;
-
 	//血条组件
 	UPROPERTY(VisibleAnywhere,BlueprintReadOnly)
 	TObjectPtr<UWidgetComponent>HealthBar;

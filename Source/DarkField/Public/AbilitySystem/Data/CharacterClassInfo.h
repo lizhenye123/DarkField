@@ -32,6 +32,10 @@ struct FCharacterClassDefaultInfo
 	//当前类型的角色的技能
 	UPROPERTY(EditDefaultsOnly,Category="Class Defaults")
 	TArray<TSubclassOf<UGameplayAbility>>StartupAbilities;
+
+	//经验数值表
+	UPROPERTY(EditDefaultsOnly,Category="Class Defaults")
+	FScalableFloat XPReward = FScalableFloat();
 };
 /**
  * 所有角色的的初始化信息

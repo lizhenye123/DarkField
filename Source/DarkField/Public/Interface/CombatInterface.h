@@ -6,6 +6,7 @@
 #include "UObject/Interface.h"
 #include "GameplayTagContainer.h"
 #include "NiagaraSystem.h"
+#include "AbilitySystem/Data/CharacterClassInfo.h"
 #include "CombatInterface.generated.h"
 
 //蒙太奇标记
@@ -88,6 +89,11 @@ public:
 	UFUNCTION(BlueprintNativeEvent,BlueprintCallable)
 	int32 GetMinionCount();
 
+	//增加召唤物数量
 	UFUNCTION(BlueprintNativeEvent,BlueprintCallable)
 	void IncrementMinionCount(int32 Amount);
+
+	//获取当前角色的角色类型
+	UFUNCTION(BlueprintNativeEvent,BlueprintCallable)
+	ECharacterClass GetCharacterClass();
 };

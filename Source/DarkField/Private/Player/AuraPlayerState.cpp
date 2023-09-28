@@ -29,6 +29,7 @@ void AAuraPlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 	DOREPLIFETIME(AAuraPlayerState,Level);
+	DOREPLIFETIME(AAuraPlayerState,XP);
 }
 
 int32 AAuraPlayerState::GetPlayerLevel() const
@@ -36,7 +37,38 @@ int32 AAuraPlayerState::GetPlayerLevel() const
 	return Level;
 }
 
+void AAuraPlayerState::AddToXP(int32 InXP)
+{
+	//这两函数都在服务器
+	XP+=InXP;
+	OnXPChangedDelegate.Broadcast(XP);
+}
+
+void AAuraPlayerState::SetXP(int32 InXP)
+{
+	XP=InXP;
+	OnXPChangedDelegate.Broadcast(XP);
+}
+
+void AAuraPlayerState::AddToLevel(int32 InLevel)
+{
+	Level+=InLevel;
+	OnLevelChangedDelegate.Broadcast(Level);
+}
+
+void AAuraPlayerState::SetLevel(int32 InLevel)
+{
+	Level=InLevel;
+	OnLevelChangedDelegate.Broadcast(Level);
+}
+
 void AAuraPlayerState::OnRep_Level(int32 OldLevel)
 {
-	
+	//这个是客户端
+	OnXPChangedDelegate.Broadcast(XP);
+}
+
+void AAuraPlayerState::OnRep_XP(int32 OldXP)
+{
+	OnLevelChangedDelegate.Broadcast(Level);
 }

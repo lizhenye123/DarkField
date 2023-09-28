@@ -186,6 +186,11 @@ public:
 	UPROPERTY(BlueprintReadOnly,Category="Meta Attributes")
 	FGameplayAttributeData IncomingDamage;
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet,IncomingDamage);
+
+	//临时的经验值,他不复制,在服务器处理
+	UPROPERTY(BlueprintReadOnly,Category="Meta Attributes")
+	FGameplayAttributeData IncomingXP;
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet,IncomingXP);
 	
 	UFUNCTION()
 	void OnRep_Health(const FGameplayAttributeData&OldHealth)const;

@@ -59,6 +59,9 @@ public:
 
 	//设置当前的召唤物数量
 	virtual void IncrementMinionCount_Implementation(int32 Amount) override;
+
+	//获取当前角色的角色类型
+	ECharacterClass GetCharacterClass_Implementation() override;
 	//ICombatInterface End
 	
 	//死亡多播
@@ -90,6 +93,10 @@ protected:
 protected:
 	UPROPERTY(EditAnywhere,BlueprintReadOnly,Category="Combat")
 	TObjectPtr<USkeletalMeshComponent> Weapon;
+
+	//角色类型
+	UPROPERTY(EditAnywhere,BlueprintReadOnly,Category="Character Class Defaults")
+	ECharacterClass CharacterClass=ECharacterClass::Warrior;
 	
 	//武器发射物体的Socket
 	UPROPERTY(EditAnywhere,Category="Combat")

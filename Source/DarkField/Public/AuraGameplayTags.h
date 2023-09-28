@@ -79,11 +79,17 @@ public:
 	//物理
 	FGameplayTag Damage_Physical;
 
-	//敌人的攻击手段
+	//技能
 	//攻击
 	FGameplayTag Abilities_Attack;
 	//召唤
 	FGameplayTag Abilities_Summon;
+	//火球术
+	FGameplayTag Abilities_Fire_FireBolt;
+
+	//冷却
+	//火球术冷却
+	FGameplayTag Cooldown_Fire_FireBolt;
 
 	//Socket
 	//武器
