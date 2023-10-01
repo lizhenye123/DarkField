@@ -24,6 +24,9 @@ public:
 	//添加GA数组到角色
 	void AddCharacterAbilities(const TArray<TSubclassOf<UGameplayAbility>>& StartupAbilities);
 	
+	//添加被动GA数组到角色
+	void AddCharacterPassiveAbilities(const TArray<TSubclassOf<UGameplayAbility>>& StartupPassiveAbilities);
+	
 	//有GE应用到身上时,返回GE的AssetTag,代理
 	FEffectAssetTags EffectAssetTags;
 

@@ -60,6 +60,10 @@ public:
 	//物理
 	FGameplayTag Attributes_Resistance_Physical;
 
+	//临时数据
+	//经验值
+	FGameplayTag Attributes_Meta_IncomingXP;
+
 	//输入的Tag
 	FGameplayTag InputTag_LMB;
 	FGameplayTag InputTag_RMB;

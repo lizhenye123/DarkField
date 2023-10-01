@@ -22,6 +22,11 @@ void UOverlayWidgetController::BindCallbacksToDependencies()
 {
 	AAuraPlayerState*AuraPlayerState = CastChecked<AAuraPlayerState>(PlayerState);
 	AuraPlayerState->OnXPChangedDelegate.AddUObject(this,&UOverlayWidgetController::OnXPChanged);
+	AuraPlayerState->OnLevelChangedDelegate.AddLambda(
+		[&](int32 NewLevel)
+	{
+			OnPlayerLevelChangedDelegate.Broadcast(NewLevel);
+	});
 	
 	const UAuraAttributeSet*AuraAttributeSet=CastChecked<UAuraAttributeSet>(AttributeSet);
 	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(AuraAttributeSet->GetHealthAttribute()).AddLambda(
@@ -126,7 +131,7 @@ void UOverlayWidgetController::OnXPChanged(int32 NewXP) const
 		//上一个等级的经验要求
 		const int32 PreviousLevelUpRequirement = LevelUpInfo->LevelUpInforamtion[Level-1].LevelUpRequirement;
 
-		//上一级到当前等级需要的经验值
+		//上一级到当前等级需要的经验值之间的差值
 		const int32 DeltaLevelRequirement = LevelUpRequirement - PreviousLevelUpRequirement;
 		//NewXP是角色所有的经验 - 上一个等级的经验要求 
 		const int32 XRForThisLevel = NewXP - PreviousLevelUpRequirement;

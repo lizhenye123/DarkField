@@ -35,6 +35,8 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FMessageWidgetRowSignature,FUIWidget
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FAbilityInfoSignature,const FAuraAbilityInfo&,Info);
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPlayerStatChangedSignature,int32,NewValue);
+
 /**
  * 
  */
@@ -73,6 +75,10 @@ public:
 	//经验值百分比变更
 	UPROPERTY(BlueprintAssignable,Category="GAS|XP")
 	FOnAttributeChangedSignature OnXPPercentChangedDelegate;
+
+	//等级变化时的代理
+	UPROPERTY(BlueprintAssignable,Category="GAS|XP")
+	FOnPlayerStatChangedSignature OnPlayerLevelChangedDelegate;
 
 	/*这个两个函数是因为代理更新时,两个最大值一直是0 所以写了一个直接获取的函数*/
 	UFUNCTION(BlueprintPure)

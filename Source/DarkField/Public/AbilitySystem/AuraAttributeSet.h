@@ -257,6 +257,9 @@ private:
 
 	//显示浮动数字
 	void ShowFloatingText(const FEffectProperties& Props,float Damage,bool bBlockedHit,bool bCriticalHit)const;
+
+	//发送XP经验值
+	void SendXPEvent(const FEffectProperties& Props);
 };
 
 
