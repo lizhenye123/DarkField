@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameplayTagContainer.h"
 #include "UI/WidgetController/AuraWidgetController.h"
 #include "AttributeWidgetController.generated.h"
 
@@ -27,9 +28,17 @@ public:
 	//绑定Attribute改变时的代理
 	virtual void BindCallbacksToDependencies()override;
 
-	//属性值改变时的代理
+	//升级属性
+	UFUNCTION(BlueprintCallable)
+	void UpgradeAttribute(const FGameplayTag&AttributeTag);
+
+	//属性值改变时的代理,这是改变属性面板的显示值
 	UPROPERTY(BlueprintAssignable,Category="GAS|Attributes")
 	FAttributeInfoSignature AttributeInfoDelegate;
+
+	//升级时属性值改变时的代理
+	UPROPERTY(BlueprintAssignable,Category="GAS|Attributes")
+	FOnPlayerStatChangedSignature AttributePointsChangedDelegate;
 
 protected:
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly)

@@ -71,6 +71,8 @@ public:
 	FGameplayTag InputTag_2;
 	FGameplayTag InputTag_3;
 	FGameplayTag InputTag_4;
+	FGameplayTag InputTag_Passive_1;
+	FGameplayTag InputTag_Passive_2;
 
 	//伤害Tag
 	FGameplayTag Damage;
@@ -90,6 +92,27 @@ public:
 	FGameplayTag Abilities_Summon;
 	//火球术
 	FGameplayTag Abilities_Fire_FireBolt;
+	//雷击
+	FGameplayTag Abilities_Lightning_Electrocute;
+
+	FGameplayTag Abilities_HitReact;
+	//技能树中的技能状态
+	//锁定
+	FGameplayTag Abilities_Status_Locked;
+	//符合条件
+	FGameplayTag Abilities_Status_Eligible;
+	//解锁
+	FGameplayTag Abilities_Status_Unlocked;
+	//装备
+	FGameplayTag Abilities_Status_Equipped;
+
+	//技能类型
+	//主动攻击技能
+	FGameplayTag Abilities_Type_Offensive;
+	//被动技能
+	FGameplayTag Abilities_Type_Passive;
+	//这个GA不作用与技能
+	FGameplayTag Abilities_Type_None;
 
 	//冷却
 	//火球术冷却

@@ -73,14 +73,19 @@ void UAuraAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, 
 {
 	Super::PreAttributeChange(Attribute, NewValue);
 	//这个返回的NewValue，不是GE中给加的多少,而是加完以后要设置的值
-	if (Attribute == GetHealthAttribute())
+	if (Attribute.IsValid())
 	{
-		NewValue = FMath::Clamp(NewValue,0,GetMaxHealth());	
+		//好像不能拿AttributePropety来比了 一比就崩溃
+		if (Attribute.AttributeName == "Health")
+		{
+			NewValue = FMath::Clamp(NewValue,0,GetMaxHealth());	
+		}
+		if (Attribute.AttributeName == "Mana")
+		{
+			NewValue = FMath::Clamp(NewValue,0,GetMaxMana());
+		}
 	}
-	if (Attribute == GetManaAttribute())
-	{
-		NewValue = FMath::Clamp(NewValue,0,GetMaxMana());
-	}
+
 }
 
 void UAuraAttributeSet::SetEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Props) const
@@ -177,14 +182,31 @@ void UAuraAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallba
 				IPlayerInterface::Execute_AddToPlayerLevel(Props.SourceCharacter,NumLevelUps);
 				IPlayerInterface::Execute_AddToAttributePoints(Props.SourceCharacter,AttributePointsReward);
 				IPlayerInterface::Execute_AddToSpellPoints(Props.SourceCharacter,SpellPointsReward);
-
-				SetHealth(GetMaxHealth());
-				SetMana(GetMaxMana());
+				
+				bTopOffHealth=true;
+				bTopOffMana=true;
 
 				IPlayerInterface::Execute_LevelUp(Props.SourceCharacter);
 			}
 			IPlayerInterface::Execute_AddToXP(Props.SourceCharacter,LocalIncomingXP);
 		}
+	}
+}
+
+void UAuraAttributeSet::PostAttributeChange(const FGameplayAttribute& Attribute, float OldValue, float NewValue)
+{
+	Super::PostAttributeChange(Attribute, OldValue, NewValue);
+	
+	if (Attribute==GetHealthAttribute() && bTopOffHealth)
+	{
+		SetHealth(GetMaxHealth());
+		bTopOffHealth=false;
+	}
+	
+	if (Attribute==GetManaAttribute() && bTopOffMana)
+	{
+		SetMana(GetMaxMana());
+		bTopOffMana=false;
 	}
 }
 

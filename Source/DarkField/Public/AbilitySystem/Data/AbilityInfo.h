@@ -7,6 +7,8 @@
 #include "Engine/DataAsset.h"
 #include "AbilityInfo.generated.h"
 
+class UGameplayAbility;
+
 USTRUCT(BlueprintType)
 struct FAuraAbilityInfo
 {
@@ -20,9 +22,13 @@ struct FAuraAbilityInfo
 	UPROPERTY(BlueprintReadOnly)
 	FGameplayTag InputTag = FGameplayTag();
 
-	//GA的Tag
+	//冷却Tag
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly)
 	FGameplayTag CooldownTag = FGameplayTag();
+
+	//技能是否解锁的Tag
+	UPROPERTY(BlueprintReadOnly)
+	FGameplayTag StatusTag = FGameplayTag();
 
 	//技能的图标
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly)
@@ -31,6 +37,14 @@ struct FAuraAbilityInfo
 	//技能的背景元素
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly)
 	TObjectPtr<const UMaterialInterface> BackgroundMaterial=nullptr;
+	
+	//技能的解锁等级
+	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly)
+	int32 LevelRequirement;
+
+	//技能类
+	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly)
+	TSubclassOf<UGameplayAbility> Ability;
 };
 
 /**

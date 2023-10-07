@@ -2,34 +2,44 @@
 
 
 #include "UI/WidgetController/AttributeWidgetController.h"
+
+#include "AbilitySystem/AuraAbilitySystemComponent.h"
 #include "AbilitySystem/AuraAttributeSet.h"
 #include "AbilitySystem/Data/AttributeInfo.h"
+#include "Player/AuraPlayerState.h"
 
 void UAttributeWidgetController::BindCallbacksToDependencies()
 {
-	UAuraAttributeSet*AS = CastChecked<UAuraAttributeSet>(AttributeSet);
-
-	for (auto&Pair:AS->TagsToAttributes)
+	for (auto&Pair:GetAuraAS()->TagsToAttributes)
 	{
 		AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(Pair.Value()).AddLambda(
-			[this,AS,Pair](const FOnAttributeChangeData&Data)
+			[this,Pair](const FOnAttributeChangeData&Data)
 			{
 				BroadcastAttributeInfo(Pair.Key,Pair.Value());
 			}
 		);
 	}
+	
+	GetAuraPS()->OnAttributePointsChangedDelegate.AddLambda([this](int32 Points)
+	{
+		AttributePointsChangedDelegate.Broadcast(Points);
+	});
+}
+
+void UAttributeWidgetController::UpgradeAttribute(const FGameplayTag& AttributeTag)
+{
+	GetAuraASC()->UpgradeAttribute(AttributeTag);
 }
 
 void UAttributeWidgetController::BroadcastInitialValues()
 {
-	UAuraAttributeSet*AS = CastChecked<UAuraAttributeSet>(AttributeSet);
-
 	check(AttributeInfo);
 	
-	for (auto &Pair:AS->TagsToAttributes)
+	for (auto &Pair:GetAuraAS()->TagsToAttributes)
 	{
 		BroadcastAttributeInfo(Pair.Key,Pair.Value());
 	}
+	AttributePointsChangedDelegate.Broadcast(GetAuraPS()->GetAttributePoints());
 }
 
 

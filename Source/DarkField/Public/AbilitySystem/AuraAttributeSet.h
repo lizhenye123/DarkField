@@ -65,6 +65,8 @@ public:
 	virtual void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override;
 
 	virtual void PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData &Data)override;
+
+	virtual void PostAttributeChange(const FGameplayAttribute& Attribute, float OldValue, float NewValue) override;
 public:
 
 	//拿对应的Tag,可以获取对应的Attribute
@@ -260,6 +262,10 @@ private:
 
 	//发送XP经验值
 	void SendXPEvent(const FEffectProperties& Props);
+
+	//升级后 恢复最大生命和蓝量
+	bool bTopOffHealth = false;
+	bool bTopOffMana = false;
 };
 
 

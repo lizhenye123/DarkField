@@ -6,6 +6,7 @@
 #include "GameFramework/HUD.h"
 #include "AuraHUD.generated.h"
 
+class USpellMenuWidgetController;
 class UAttributeSet;
 class UAbilitySystemComponent;
 struct FWidgetControllerParams;
@@ -27,6 +28,9 @@ public:
 
 	//获取AttributeWidget的控制器
 	UAttributeWidgetController*GetAttributeWidgetController(const FWidgetControllerParams&WCParams);
+
+	//获取pellMenuWidgetController
+	USpellMenuWidgetController*GetSpellMenuWidgetController(const FWidgetControllerParams&WCParams);
 
 	//初始化Overlay控制器参数
 	void InitOverlay(APlayerController*PC,APlayerState*PS,UAbilitySystemComponent*ASC,UAttributeSet*AS);
@@ -52,7 +56,15 @@ private:
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<UAttributeWidgetController> AttributeMenuWidgetControllerClass;
 	
-	//属性控制器的实例,用于技能点UI
+	//属性控制器的实例,用于属性点UI
 	UPROPERTY()
 	TObjectPtr<UAttributeWidgetController> AttributeMenuWidgetController;
+
+	//Widget技能控制器的类
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<USpellMenuWidgetController> SpellMenuWidgetControllerClass;
+	
+	//技能控制器的实例,用于技能点UI
+	UPROPERTY()
+	TObjectPtr<USpellMenuWidgetController> SpellMenuWidgetController;
 };

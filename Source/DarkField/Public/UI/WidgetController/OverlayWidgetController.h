@@ -33,9 +33,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAttributeChangedSignature, float,
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FMessageWidgetRowSignature,FUIWidgetRow,Row);
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FAbilityInfoSignature,const FAuraAbilityInfo&,Info);
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPlayerStatChangedSignature,int32,NewValue);
 
 /**
  * 
@@ -68,10 +66,6 @@ public:
 	UPROPERTY(BlueprintAssignable,Category="GAS|Message")
 	FMessageWidgetRowSignature MessageWidgetRowSignature;
 
-	//通知主控端,技能变跟
-	UPROPERTY(BlueprintAssignable,Category="GAS|Message")
-	FAbilityInfoSignature AbilityInfoDelegate;
-
 	//经验值百分比变更
 	UPROPERTY(BlueprintAssignable,Category="GAS|XP")
 	FOnAttributeChangedSignature OnXPPercentChangedDelegate;
@@ -93,20 +87,13 @@ protected:
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly,Category="Widget Data")
 	TObjectPtr<UDataTable>MessageWidgetDataTable;
 
-	//角色可以注册使用的技能信息
-	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly,Category="Widget Data")
-	TObjectPtr<UAbilityInfo> AbilityInfo;
-
 	void BindPickUp(const FGameplayTagContainer&AssetTags);
-
-	//初始化当前拥有的技能在图标栏上
-	void OnInitializeStartupAbilities(UAuraAbilitySystemComponent*AuraAbilitySystemComponent);
 
 	template<typename T>
 	T* GetDataTableRowByTag(UDataTable*DataTable,const FGameplayTag&Tag);
 
 	//经验值改变时
-	void OnXPChanged(int32 NewXP)const;
+	void OnXPChanged(int32 NewXP);
 };
 
 template <typename T>
